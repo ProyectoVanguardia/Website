@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { NavLink as Link } from 'react-router-dom';
 import { FaPaintBrush } from 'react-icons/fa';
-import logo from '../../images/logo.png';
+
 
 export const Nav = styled.nav`
   img: logo,  

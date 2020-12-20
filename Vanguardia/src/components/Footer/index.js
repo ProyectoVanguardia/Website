@@ -15,7 +15,6 @@ import {
   SocialIcons,
   SocialIconLink
 } from './FooterElements';
-import product1 from '../../images/logo.png';
 
 const Footer = () => {
   return (
