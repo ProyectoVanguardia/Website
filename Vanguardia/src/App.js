@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, input } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { GlobalStyle } from './globalStyles';
 import Hero from './components/Hero';
@@ -6,6 +6,7 @@ import Products from './components/Products';
 import { productData, productDataTwo } from './components/Products/data';
 import Feature from './components/Feature';
 import Footer from './components/Footer';
+import { firebase, fs } from "./Firebase/config";
 import { render } from '@testing-library/react';
 import Web3 from 'web3'
 import { TODO_LIST_ABI, TODO_LIST_ADDRESS } from './config'
@@ -40,12 +41,22 @@ class App extends Component {
     this.state = {
       account: '',
       taskCount: 0,
-      tasks: []
+      tasks: [],
+      correo:"prueba"
 
     }
+    this.updateInput = this.updateInput.bind(this);
+    this.addDB = this.addDB.bind(this); 
   }
-
-
+  addDB(){
+    fs.collection("Correos")
+      .add({
+        correo: this.state.correo
+      })                                                                                  
+  }
+  updateInput = event => {
+    this.setState({correo : event.target.value})
+  }
   render() {
     return (
       <Router>
@@ -58,14 +69,14 @@ class App extends Component {
         <Footer />
         <div className="container-fluid" style={{backgroundColor: 'black'}}>
           <div className="row">
-            <main role="main" className="col-lg-12 d-flex justify-content-center">
+            <main role="main" className="col-lg-12 d-flex justify-content-cenzxwter">
               <div id="loader" className="text-center">
                 <p className="text-center" style={{ color: 'white' }}>Quieres que te contactemos? Dejanos tu correo electronico!</p>
               </div>
               <div id="content">
-                <form >
-                  <input id="newTask" type="text" className="form-control" placeholder="Correo" required />
-                  <input type="submit" placeholder="Add task..."  hidden="" />
+                <form >           
+                  <input  id="newTask" type="text"  onChange={this.updateInput} className="form-control" placeholder="Correo" required />
+                  <input  type="submit" placeholder="Add task..."  hidden="" onClick={this.addDB}/>
                 </form>
               </div>
             </main>
